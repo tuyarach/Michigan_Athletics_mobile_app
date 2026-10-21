@@ -674,7 +674,7 @@ h2 {
   display: grid;
   place-items: center;
   border-radius: 50%;
-  background: transparent url("images/maya-concierge-cutout.png") center top / 175% auto no-repeat;
+  background: transparent url("images/maya-concierge-cutout.png") center 6px / 175% auto no-repeat;
   overflow: hidden;
 }
 
@@ -1906,7 +1906,7 @@ h2 {
 
 .concierge-avatar {
   border: 1px solid rgba(184, 196, 209, 0.72);
-  background: var(--lux-surface) url("images/maya-concierge-cutout.png") center top / 175% auto no-repeat;
+  background: var(--lux-surface) url("images/maya-concierge-cutout.png") center 6px / 175% auto no-repeat;
 }
 
 .concierge-status {

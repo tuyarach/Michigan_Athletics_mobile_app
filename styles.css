@@ -674,7 +674,7 @@ h2 {
   display: grid;
   place-items: center;
   border-radius: 50%;
-  background: transparent url("maya-concierge-cutout.png") center top / 175% auto no-repeat;
+  background: transparent url("images/maya-concierge-cutout.png") center top / 175% auto no-repeat;
   overflow: hidden;
 }
 
@@ -1667,7 +1667,7 @@ h2 {
   height: 76px;
   margin: 23px auto 18px;
   border-radius: 23px;
-  background: transparent url("maya-concierge-cutout.png") center top / 175% auto no-repeat;
+  background: transparent url("images/maya-concierge-cutout.png") center top / 175% auto no-repeat;
   color: var(--blue-3);
   overflow: visible;
 }
@@ -1906,7 +1906,7 @@ h2 {
 
 .concierge-avatar {
   border: 1px solid rgba(184, 196, 209, 0.72);
-  background: var(--lux-surface) url("maya-concierge-cutout.png") center top / 175% auto no-repeat;
+  background: var(--lux-surface) url("images/maya-concierge-cutout.png") center top / 175% auto no-repeat;
 }
 
 .concierge-status {
@@ -2166,7 +2166,7 @@ h2 {
 }
 
 .escort-illustration {
-  background: var(--lux-surface-raised) url("maya-concierge-cutout.png") center top / 175% auto no-repeat;
+  background: var(--lux-surface-raised) url("images/maya-concierge-cutout.png") center top / 175% auto no-repeat;
   color: var(--lux-gold);
 }
 

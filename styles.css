@@ -674,7 +674,7 @@ h2 {
   display: grid;
   place-items: center;
   border-radius: 50%;
-  background: transparent url("images/maya-concierge-cutout.png") center 10px / 155% auto no-repeat;
+  background: transparent url("images/maya-concierge-cutout.png") center 6px / 175% auto no-repeat;
   overflow: hidden;
 }
 

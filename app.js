@@ -101,11 +101,15 @@ const routeDrawerCollapsedHeight = 128;
 const routeDrawerTopGap = 16;
 
 function readPreferences() {
-  const defaults = { stepFree: false, escort: true, largeText: false };
+  const defaults = { stepFree: false, wideDoorframes: true, largeText: false };
 
   try {
     const stored = JSON.parse(localStorage.getItem("michigan-premier-preferences"));
-    return { ...defaults, ...stored };
+    return {
+      stepFree: Boolean(stored?.stepFree ?? defaults.stepFree),
+      wideDoorframes: Boolean(stored?.wideDoorframes ?? defaults.wideDoorframes),
+      largeText: Boolean(stored?.largeText ?? defaults.largeText),
+    };
   } catch {
     return defaults;
   }

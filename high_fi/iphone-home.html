@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>iPhone Home</title>
+    <link rel="stylesheet" href="iphone-home.css" />
+  </head>
+  <body>
+    <main class="iphone-home" aria-label="iPhone home screen">
+      <img class="home-reference" src="images/iphone-home-background.png" alt="" />
+      <button class="premier-launch" type="button" aria-label="Open Michigan Premier">
+        <span class="premier-icon" aria-hidden="true"><img src="images/michigan_wolverines_logo.png" alt="" /></span>
+        <span class="icon-label">Premier</span>
+      </button>
+      <div class="launch-splash" aria-hidden="true"><img src="images/michigan_wolverines_logo.png" alt="" /></div>
+    </main>
+    <script>
+      const launch = document.querySelector('.premier-launch');
+      launch.addEventListener('click', () => {
+        if (document.documentElement.classList.contains('is-launching')) return;
+        document.documentElement.classList.add('is-launching');
+        window.setTimeout(() => { window.location.href = 'index.html?launch=1'; }, 1500);
+      });
+    </script>
+  </body>
+</html>

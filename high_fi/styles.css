@@ -1,0 +1,391 @@
+:root { --navy:#031735; --navy-deep:#010b1d; --ink:#f5f7fb; --muted:#b7c3d7; --line:rgba(235,243,255,.18); --glass:rgba(10,32,65,.56); --glass-bright:rgba(255,255,255,.11); --maize:#ffcb05; --radius:24px; font-family:"Atkinson Hyperlegible",Atkinson,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; color:var(--ink); color-scheme:dark; }
+* { box-sizing:border-box; } [hidden] { display:none !important; } html,body { min-height:100%; margin:0; } body { background:#020b1a; } button,input { font:inherit; } button { color:inherit; cursor:pointer; } button:focus-visible,input:focus-visible { outline:3px solid var(--maize); outline-offset:3px; } svg { width:22px; height:22px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }.sprite{position:absolute;width:0;height:0;overflow:hidden}.visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.app-shell { min-height:100dvh; display:grid; place-items:center; padding:20px; }.app-frame { position:relative; isolation:isolate; width:min(100%,430px); height:min(900px,calc(100dvh - 40px)); min-height:660px; overflow:hidden; border:1px solid rgba(222,235,255,.14); border-radius:var(--radius); background:radial-gradient(circle at 10% 0%,rgba(38,83,148,.78),transparent 43%),radial-gradient(circle at 100% 40%,rgba(0,83,153,.42),transparent 38%),linear-gradient(155deg,#09234b 0%,var(--navy) 45%,var(--navy-deep) 100%); box-shadow:0 28px 80px rgba(0,0,0,.52); }.app-frame::before { content:""; position:absolute; z-index:-1; inset:-20%; background:linear-gradient(135deg,transparent 30%,rgba(255,255,255,.06) 50%,transparent 65%); transform:rotate(-15deg); }
+.topbar { position:absolute; z-index:5; inset:0 0 auto; height:78px; display:flex; align-items:center; justify-content:space-between; padding:23px 25px 14px; background:linear-gradient(180deg,rgba(1,11,29,.54),transparent); }.wordmark { padding:0; border:0; background:none; color:#fff; font-size:11px; font-weight:760; letter-spacing:.18em; }.wordmark span { display:inline-grid; place-items:center; width:23px; height:23px; margin-right:7px; border-radius:7px; background:var(--maize); color:#00274c; font-size:16px; font-weight:900; letter-spacing:0; }.avatar { width:35px; height:35px; border:1px solid var(--line); border-radius:50%; background:var(--glass-bright); color:#fff; font-size:11px; font-weight:760; backdrop-filter:blur(12px); }
+.views{position:absolute;inset:78px 0 0}.view{width:100%;height:100%}.scroll{height:100%;overflow:auto;scrollbar-width:none}.scroll::-webkit-scrollbar{display:none}.home-content,.profile-content{padding:31px 21px 105px}.home-intro{padding-left:4px}.micro{margin:0 0 10px;color:var(--muted);font-size:10px;font-weight:760;letter-spacing:.14em;line-height:1.3}h1,h2,p{margin-top:0}h1{margin-bottom:12px;color:#fff;font-size:35px;line-height:1.07;letter-spacing:-.046em;font-weight:700}.intro{max-width:292px;margin-bottom:28px;color:var(--muted);font-size:15px;line-height:1.47}
+.pass-people { display:flex; gap:8px; margin:0 0 12px; padding:4px; border:1px solid var(--line); border-radius:var(--radius); background:rgba(2,13,33,.33); backdrop-filter:blur(12px); }.pass-person { flex:1; min-width:0; display:flex; align-items:center; justify-content:center; gap:5px; min-height:34px; padding:0 8px; border:0; border-radius:18px; background:transparent; color:var(--muted); font-size:11px; font-weight:700; }.pass-person.active { background:rgba(255,255,255,.16); color:#fff; box-shadow:inset 0 0 0 1px rgba(255,255,255,.11); }.pass-person svg { width:14px; height:14px; color:var(--maize); }
+.pass-card { position:relative; width:100%; min-height:210px; display:flex; flex-direction:column; justify-content:space-between; padding:22px; overflow:hidden; border:1px solid rgba(255,255,255,.24); border-radius:var(--radius); background:linear-gradient(145deg,rgba(60,91,137,.57),rgba(4,19,45,.61)); box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 18px 38px rgba(0,0,0,.22); color:#fff; text-align:left; backdrop-filter:blur(18px) saturate(130%); }.pass-card::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(255,255,255,.13),transparent 32%,transparent 70%,rgba(255,255,255,.06));pointer-events:none}.pass-card-top,.pass-card-bottom{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;color:rgba(255,255,255,.74);font-size:10px;font-weight:750;letter-spacing:.11em}.pass-card-bottom{color:#fff;letter-spacing:.075em}.pass-card-bottom svg{width:19px;height:19px}.match{position:relative;z-index:1;max-width:276px;font-size:27px;line-height:1.06;letter-spacing:-.033em;font-weight:740}.match i{color:var(--maize);font-size:16px;font-style:normal;font-weight:500}
+.actions { margin-top:31px; }.actions .micro{margin-left:4px;margin-bottom:10px}.action-row{width:100%;display:grid;grid-template-columns:44px 1fr 20px;gap:13px;align-items:center;margin-bottom:10px;padding:13px;border:1px solid var(--line);border-radius:var(--radius);background:var(--glass);box-shadow:inset 0 1px 0 rgba(255,255,255,.1);text-align:left;backdrop-filter:blur(16px)}.action-icon{width:44px;height:44px;display:grid;place-items:center;border-radius:15px;background:rgba(153,190,231,.17);color:#fff}.action-icon.warm{background:rgba(255,203,5,.19);color:var(--maize)}.action-row strong,.action-row small{display:block}.action-row strong{color:#fff;font-size:15px;font-weight:700}.action-row small{margin-top:3px;color:var(--muted);font-size:12px}.arrow{color:#d3ddea}
+.nav{position:absolute;z-index:5;inset:auto 16px 14px;height:58px;display:grid;grid-template-columns:repeat(3,1fr);padding:5px;border:1px solid rgba(239,246,255,.28);border-radius:var(--radius);background:rgba(221,234,255,.18);box-shadow:0 10px 30px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.24);backdrop-filter:blur(20px) saturate(135%)}.nav-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border:0;border-radius:18px;background:transparent;color:#c0cee1;font-size:10px;font-weight:650}.nav-item svg{width:19px;height:19px}.nav-item.active{background:rgba(255,255,255,.21);color:var(--maize)}
+.map-wrap{position:relative;height:100%;overflow:hidden;background:#061b3b}.map-wrap>img{width:100%;height:100%;object-fit:cover;opacity:.58;filter:saturate(.55) brightness(.7)}.route-path{position:absolute;inset:0;width:100%;height:100%;color:var(--maize);filter:drop-shadow(0 2px 2px rgba(0,0,0,.85))}.route-path path{stroke:var(--maize);stroke-width:8;stroke-dasharray:1 12;stroke-linecap:round;fill:none}.route-path circle:first-of-type{fill:var(--maize);stroke:#fff;stroke-width:4}.route-path circle:last-of-type{fill:var(--navy);stroke:#fff;stroke-width:4}.locate{position:absolute;top:20px;right:20px;width:43px;height:43px;display:grid;place-items:center;border:1px solid var(--line);border-radius:50%;background:var(--glass);color:#fff;box-shadow:0 5px 16px rgba(0,0,0,.25);backdrop-filter:blur(16px)}.route-sheet{position:absolute;inset:auto 14px 76px;padding:13px 19px 18px;border:1px solid var(--line);border-radius:var(--radius);background:rgba(4,19,45,.86);box-shadow:inset 0 1px 0 rgba(255,255,255,.13);backdrop-filter:blur(20px)}.sheet-line{display:block;width:31px;height:3px;margin:0 auto 18px;border-radius:999px;background:rgba(255,255,255,.32)}.route-heading{display:flex;justify-content:space-between;gap:18px;align-items:start}.route-heading h2,.setting-group h2{margin:0 0 5px;color:#fff;font-size:19px;letter-spacing:-.026em}.route-heading p{margin:0;color:var(--muted);font-size:12px;line-height:1.45}.route-heading>strong{color:var(--maize);font-size:29px;line-height:.9;letter-spacing:-.06em}.route-heading>strong span{display:block;margin-top:5px;color:var(--muted);font-size:10px;letter-spacing:0;text-align:right}.access-option,.setting{display:flex;align-items:center;justify-content:space-between;margin:22px 0 17px;color:#fff;font-size:13px;font-weight:650}.access-option>span{display:flex;align-items:center;gap:9px}.access-option svg{width:18px;height:18px;color:var(--maize)}input[type="checkbox"]{position:absolute;opacity:0;pointer-events:none}.access-option i,.setting>i{position:relative;width:37px;height:22px;border-radius:999px;background:rgba(255,255,255,.22);transition:.2s ease}.access-option i::after,.setting>i::after{content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.22);transition:.2s ease}input:checked+i{background:var(--maize)}input:checked+i::after{transform:translateX(15px)}.route-button{width:100%;display:flex;align-items:center;justify-content:center;gap:8px;min-height:48px;border:0;border-radius:16px;background:var(--maize);color:#14213a;font-size:13px;font-weight:800}.route-button svg{width:18px;height:18px}
+.profile-content{padding-top:37px}.profile-rule{height:1px;margin:43px 0 27px;background:var(--line)}.setting-group{margin-bottom:36px}.setting-group h2{margin-bottom:16px;font-size:15px}.setting{margin:0;padding:14px 0;border-top:1px solid var(--line)}.setting>span{display:flex;gap:12px;align-items:center}.setting svg{width:20px;height:20px;color:var(--maize)}.setting strong,.setting small{display:block}.setting strong{font-size:13px;font-weight:700}.setting small{margin-top:3px;color:var(--muted);font-size:11px;font-weight:400}.quiet-row{width:100%;display:flex;align-items:center;justify-content:space-between;padding:17px 0;border:0;border-top:1px solid var(--line);background:none;color:#fff;text-align:left;font-size:13px;font-weight:650}.quiet-row svg{width:18px;height:18px;color:var(--muted)}
+.scrim{position:absolute;z-index:10;inset:0;background:rgba(0,7,20,.67);backdrop-filter:blur(3px)}.modal{position:absolute;z-index:11;inset:auto 17px 17px;padding:29px 24px 24px;border:1px solid rgba(255,255,255,.24);border-radius:var(--radius);background:rgba(9,30,61,.91);box-shadow:0 18px 45px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.14);backdrop-filter:blur(22px);animation:up .25s ease-out}.modal-small{padding-top:31px}.modal-close{position:absolute;top:14px;right:14px;width:31px;height:31px;display:grid;place-items:center;border:1px solid var(--line);border-radius:50%;background:rgba(255,255,255,.12);color:#fff}.modal-close svg{width:16px;height:16px}.modal h2{margin:0 0 13px;color:#fff;font-size:29px;line-height:1.04;letter-spacing:-.04em}.modal-details,.modal-small p:not(.micro){margin:0;color:var(--muted);font-size:13px;line-height:1.5}.barcode{height:84px;display:flex;align-items:stretch;gap:4px;margin:28px 0 17px;padding:0 4px}.barcode i{flex:1;background:#fff}.barcode i:nth-child(2n){flex:.38}.barcode i:nth-child(3n){flex:1.6}.barcode i:nth-child(5n){flex:.65}.pass-note{display:flex;align-items:center;gap:7px;margin:0;color:var(--maize);font-size:12px;font-weight:650}.pass-note svg{width:17px;height:17px}.modal-small .route-button{margin-top:24px}.toast{position:absolute;z-index:20;inset:auto 16px 85px;max-width:none;padding:12px 15px;border:1px solid rgba(255,255,255,.16);border-radius:15px;background:#091d3d;color:#fff;font-size:12px;line-height:1.4;box-shadow:0 10px 20px rgba(0,0,0,.3);animation:up .2s ease-out}@keyframes up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}@media(max-width:500px){body{background:var(--navy-deep)}.app-shell{padding:0}.app-frame{width:100%;height:100dvh;min-height:0;border-radius:0;box-shadow:none}}
+
+/* Ticket-led pass experience */
+.pass-card{min-height:218px;padding:22px 22px 20px;overflow:visible}.pass-card::after{content:"";position:absolute;z-index:3;top:59%;width:22px;height:22px;border-radius:50%;background:#08234c}.pass-card::after{right:-11px}.ticket-divider{position:absolute;z-index:2;top:59%;right:0;left:0;border-top:1px dashed rgba(255,255,255,.3)}.pass-card-bottom{padding-top:15px}.open-pass-button{position:relative;z-index:4;width:100%;display:flex;align-items:center;justify-content:center;gap:8px;min-height:47px;margin-top:13px;border:1px solid rgba(255,203,5,.8);border-radius:var(--radius);background:rgba(255,203,5,.12);color:var(--maize);font-size:13px;font-weight:800;box-shadow:inset 0 1px 0 rgba(255,255,255,.1)}.open-pass-button svg{width:18px;height:18px}
+.pass-drawer{inset:0;display:flex;flex-direction:column;justify-content:center;padding:0;border:0;border-radius:0;background:#031735;box-shadow:none;overflow:hidden;isolation:isolate;backdrop-filter:none}.pass-drawer-backdrop{position:absolute;z-index:-2;inset:0;background:linear-gradient(180deg,rgba(1,13,34,.55),rgba(1,10,27,.22) 42%,rgba(1,9,24,.9)),url("images/stadium-night-pass.png") center / cover no-repeat}.pass-drawer::after{content:"";position:absolute;z-index:-1;inset:0;background:radial-gradient(circle at 50% 44%,rgba(75,126,201,.3),transparent 38%),linear-gradient(130deg,rgba(0,39,76,.7),transparent 48%,rgba(255,203,5,.09));pointer-events:none}.drawer-header{position:absolute;z-index:2;inset:22px 21px auto;display:flex;align-items:center;justify-content:space-between;color:#fff;font-size:10px;font-weight:800;letter-spacing:.14em}.pass-drawer .modal-close{position:static;width:38px;height:38px;background:rgba(3,18,45,.42);backdrop-filter:blur(12px)}.ticket-carousel{display:flex;gap:15px;overflow-x:auto;overscroll-behavior-x:contain;padding:0 26px;scroll-snap-type:x mandatory;scroll-padding:26px;scrollbar-width:none}.ticket-carousel::-webkit-scrollbar{display:none}.digital-ticket{position:relative;flex:0 0 calc(100% - 52px);min-height:465px;display:flex;flex-direction:column;overflow:hidden;scroll-snap-align:center;border-radius:var(--radius);background:linear-gradient(160deg,#ffffff 0%,#f6f4ef 65%,#e8e5dd 100%);color:#102545;box-shadow:0 22px 48px rgba(0,0,0,.38)}.digital-ticket::after{content:"";position:absolute;right:-48px;bottom:-48px;width:175px;height:175px;border:1px solid rgba(0,39,76,.11);border-radius:50%;box-shadow:0 0 0 22px rgba(0,39,76,.035),0 0 0 48px rgba(0,39,76,.025);pointer-events:none}.ticket-event{display:grid;grid-template-columns:54px 1fr;gap:14px;align-items:center;padding:23px 23px 20px;background:#062655;color:#fff}.ticket-event>span{display:grid;place-items:center;width:54px;height:54px;border-radius:16px;background:var(--maize);color:#062655;font-size:10px;font-weight:800;line-height:1.05;text-align:center}.ticket-event>span strong{font-size:21px}.ticket-event p{margin:0;color:rgba(255,255,255,.72);font-size:11px;line-height:1.35}.ticket-event p strong{display:block;margin-top:3px;color:#fff;font-size:18px;line-height:1.12;letter-spacing:-.025em}.ticket-qr{position:relative;width:160px;height:160px;margin:auto;background:linear-gradient(90deg,#142541 10%,transparent 10% 20%,#142541 20% 30%,transparent 30% 40%,#142541 40% 55%,transparent 55% 65%,#142541 65% 76%,transparent 76% 86%,#142541 86%),linear-gradient(#142541 10%,transparent 10% 20%,#142541 20% 36%,transparent 36% 48%,#142541 48% 60%,transparent 60% 70%,#142541 70% 82%,transparent 82%);background-size:25px 25px;background-color:#fff}.ticket-qr::before,.ticket-qr::after{content:"";position:absolute;width:36px;height:36px;border:8px solid #142541;background:#fff}.ticket-qr::before{top:0;left:0}.ticket-qr::after{right:0;bottom:0}.ticket-stub{position:relative;z-index:1;display:grid;grid-template-columns:1.7fr 1fr .6fr .6fr;gap:8px;padding:18px 22px 24px;border-top:1px dashed rgba(0,39,76,.28)}.ticket-stub small,.ticket-stub strong{display:block}.ticket-stub small{margin-bottom:4px;color:#6a7484;font-size:8px;font-weight:800;letter-spacing:.1em}.ticket-stub strong{font-size:11px;line-height:1.15}.drawer-instruction{margin:18px 0 0;color:rgba(255,255,255,.78);font-size:12px;font-weight:650;text-align:center}
+@media(max-height:730px){.digital-ticket{min-height:405px}.ticket-qr{width:130px;height:130px}.drawer-instruction{margin-top:12px}}
+
+/* Refined physical ticket and depth carousel */
+.pass-card{display:block;min-height:0;padding:22px;overflow:hidden}.pass-card::after{inset:0;width:auto;height:auto;right:auto;top:auto;border-radius:0;background:linear-gradient(120deg,rgba(255,255,255,.13),transparent 32%,transparent 70%,rgba(255,255,255,.06));pointer-events:none}.pass-card-top,.match,.pass-card-bottom{display:flex;position:relative;z-index:1}.match{margin:28px 0 30px}.pass-card-bottom{padding:0}.ticket-divider{position:relative;z-index:1;top:auto;right:auto;left:auto;display:block;margin:16px -22px 14px;border-top:1px dashed rgba(255,255,255,.34)}.open-pass-button{margin-top:0}
+.pass-card{padding:22px}.pass-card-top{margin-bottom:22px}.match{margin:0}.pass-card-bottom{margin-top:27px}.ticket-divider{margin:17px -22px 16px}.open-pass-button{min-height:46px}
+.ticket-carousel{gap:0;padding:0 50px;scroll-padding:50px;align-items:center;perspective:1000px}.digital-ticket{flex-basis:calc(100% - 52px);min-height:465px;border:1px solid rgba(235,245,255,.52);background:linear-gradient(150deg,rgba(20,64,119,.88),rgba(3,20,51,.95));color:#fff;box-shadow:0 24px 55px rgba(0,0,0,.46),inset 0 1px 0 rgba(255,255,255,.26);backdrop-filter:blur(20px) saturate(145%);opacity:var(--ticket-opacity,.58);filter:brightness(var(--ticket-brightness,.7)) saturate(.82);transform:translateZ(-42px) scale(var(--ticket-scale,.88));transform-origin:center;transition:transform .24s cubic-bezier(.2,.8,.2,1),opacity .24s ease,filter .24s ease}.digital-ticket.active{box-shadow:0 26px 60px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.32)}.digital-ticket::after{content:none}.ticket-event{padding:25px 23px 20px;border-bottom:1px solid rgba(255,255,255,.28);background:linear-gradient(105deg,rgba(3,18,48,.54),rgba(255,255,255,.08));}.ticket-event p{color:#d7e4f5}.ticket-event p strong{color:#fff}.ticket-qr{width:158px;height:158px;margin:32px auto 29px;border:10px solid rgba(255,255,255,.95);border-radius:18px;box-shadow:0 12px 25px rgba(0,0,0,.25);background-color:#fdfdfb}.ticket-stub{margin-top:auto;padding:19px 22px 24px;border-top:1px dashed rgba(255,255,255,.5);background:rgba(2,16,43,.31)}.ticket-stub small{color:#b9c9dd}.ticket-stub strong{color:#fff}.drawer-instruction{padding:8px 15px;border:1px solid rgba(255,255,255,.18);border-radius:999px;background:rgba(2,16,43,.36);backdrop-filter:blur(10px)}
+@media(max-height:730px){.digital-ticket{min-height:405px}.ticket-qr{width:128px;height:128px;margin:20px auto}.ticket-event{padding:18px 21px}.ticket-stub{padding:14px 20px 18px}}
+
+/* Home ticket hierarchy and full-height navigation panel */
+.home-intro{padding-bottom:30px}
+.home-intro h1{margin:0}
+.pass-card-top{margin-bottom:20px}
+.match{display:block;margin:0;max-width:100%;font-size:26px;line-height:1.12;letter-spacing:-.028em;word-spacing:.08em}
+.match i{display:inline-block;margin-inline:.16em;font-size:16px;word-spacing:normal}
+.pass-card-bottom{margin-top:22px}
+.ticket-divider{margin:15px -22px 20px}
+.open-pass-button{margin-top:0}
+
+/* No app copy falls below the requested 12px accessibility baseline. */
+.wordmark,.avatar,.micro,.pass-person,.pass-card-top,.pass-card-bottom,.nav-item,.route-heading>strong span,.setting small,.drawer-header,.ticket-event>span,.ticket-event p,.ticket-stub small,.ticket-stub strong{font-size:12px}
+
+/* The sheet reaches the bottom edge while the floating navigation remains operable above it. */
+.route-sheet{inset:auto 0 0;max-height:78%;overflow:auto;padding:13px 21px 94px;border-radius:var(--radius) var(--radius) 0 0}
+.route-sheet .micro{margin-bottom:11px}
+.route-directions{display:grid;gap:13px;margin:3px 0 20px;padding:0;list-style:none}
+.route-directions li{display:grid;grid-template-columns:26px 1fr;gap:10px;align-items:start}
+.route-directions li>span{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:rgba(255,203,5,.16);color:var(--maize);font-size:12px;font-weight:800}
+.route-directions p{margin:1px 0 0;color:#fff;font-size:13px;line-height:1.3}
+.route-directions strong,.route-directions small{display:block}
+.route-directions strong{font-size:13px}
+.route-directions small{margin-top:3px;color:var(--muted);font-size:12px;line-height:1.35}
+.route-sheet.directions-active .access-option{margin-bottom:16px}
+
+/* Compact ticket identity and game-date mark. */
+.pass-card-top{justify-content:flex-end;color:rgba(255,255,255,.78);font-variant-numeric:tabular-nums;letter-spacing:.09em}
+.match-row{position:relative;z-index:1;display:flex;align-items:flex-start;gap:14px}
+.match-row .match{flex:1;min-width:0}
+.game-date{flex:0 0 48px;display:grid;place-items:center;align-content:center;min-height:54px;border:1px solid rgba(255,255,255,.26);border-radius:16px;background:rgba(255,255,255,.1);box-shadow:inset 0 1px 0 rgba(255,255,255,.14);color:#fff;text-align:center;backdrop-filter:blur(12px)}
+.game-date strong,.game-date small{display:block;line-height:1}
+.game-date strong{font-size:23px;letter-spacing:-.06em}
+.game-date small{margin-top:4px;color:var(--maize);font-size:12px;font-weight:800;letter-spacing:.08em}
+
+/* Compact ticket header, enhanced member preferences, and simplified navigation. */
+.wordmark span{width:28px;height:28px;margin-right:8px;border-radius:0;clip-path:polygon(25% 0,75% 0,100% 50%,75% 100%,25% 100%,0 50%);background:var(--maize);font-size:17px}
+.match-row{display:grid;grid-template-columns:minmax(0,1fr) 82px;gap:12px;align-items:start}
+.match-row .match{align-self:start;font-size:24px;line-height:1.1}
+.game-meta{display:grid;justify-items:end;gap:8px}
+.game-meta .pass-card-top{display:block;margin:0;color:rgba(255,255,255,.78);font-size:12px;line-height:1;white-space:nowrap}
+.game-meta .game-date{width:54px;min-height:54px}
+.pass-card-bottom{margin-top:18px}
+.pass-preferences{position:relative;z-index:1;display:block;margin-top:9px;color:var(--maize);font-size:12px;font-weight:800;letter-spacing:.07em;line-height:1.35}
+.pass-preferences:not([hidden]) + .ticket-divider{margin-top:13px}
+.warm-action strong,.warm-action .arrow{color:var(--maize)}
+.nav{grid-template-columns:repeat(2,1fr)}
+.profile-content .setting-group:first-of-type{margin-top:26px}
+.profile-content .setting-group:first-of-type .setting:first-of-type{border-top:1px solid var(--line)}
+.route-directions p{font-size:13px;font-weight:700;line-height:1.42}
+
+/* Contained ticket metadata, compact navigation, and stronger glass feedback. */
+.match-row{grid-template-columns:minmax(0,1fr) 112px}
+.match-row .match{font-size:23px}
+.game-meta{justify-items:center;min-width:0}
+.game-meta .pass-card-top{max-width:112px;white-space:normal;text-align:center;letter-spacing:.06em}
+.action-icon.warm{background:rgba(153,190,231,.17);color:#fff}
+.warm-action strong,.warm-action .arrow{color:#fff}
+.nav{right:auto;left:50%;width:min(300px,calc(100% - 80px));transform:translateX(-50%)}
+.toast{border-color:rgba(245,250,255,.42);background:linear-gradient(135deg,rgba(79,115,161,.6),rgba(8,27,60,.8));box-shadow:0 16px 34px rgba(0,0,0,.42),inset 0 1px 0 rgba(255,255,255,.32);backdrop-filter:blur(22px) saturate(145%)}
+.route-path .accessible-route,.route-path .accessible-destination{display:none}
+.route-path.accessible .standard-route,.route-path.accessible .standard-destination{display:none}
+.route-path.accessible .accessible-route,.route-path.accessible .accessible-destination{display:block}
+.route-path .standard-destination{fill:var(--navy);stroke:#fff;stroke-width:4}
+.route-path.accessible .accessible-route{stroke:#fff;stroke-width:8;stroke-dasharray:none;filter:drop-shadow(0 0 5px rgba(255,255,255,.6))}
+.route-path.accessible .route-start,.route-path.accessible .accessible-destination{fill:var(--maize);stroke:#fff;stroke-width:4}
+
+/* Alignment refinements for the ticket, preferences, and route state. */
+.match-row{align-items:center}
+.match-row .match{align-self:center}
+.game-meta{justify-items:end;text-align:right}
+.game-meta .pass-card-top{text-align:right}
+.game-meta .game-date{justify-self:end}
+.nav{width:min(270px,calc(100% - 96px))}
+.route-path.accessible .accessible-route{stroke:#8b5cf6;stroke-width:8;stroke-dasharray:1 12;stroke-linecap:round;filter:drop-shadow(0 2px 2px rgba(0,0,0,.85))}
+.route-path.accessible .route-start,.route-path.accessible .accessible-destination{fill:#8b5cf6;stroke:#fff;stroke-width:4}
+.profile-identity{display:flex;align-items:center;justify-content:space-between;gap:18px}
+.profile-identity .intro{margin-bottom:0}
+.profile-edit{flex:0 0 auto;min-height:38px;padding:0 15px;border:1px solid rgba(255,203,5,.72);border-radius:999px;background:rgba(255,203,5,.1);color:var(--maize);font-size:12px;font-weight:800}
+.setting-group h2{font-size:20px;line-height:1.15;letter-spacing:-.032em}
+
+/* Light-mode visual system: warm porcelain surfaces, navy text, and maize accents. */
+:root{--navy:#0b315d;--navy-deep:#edf1f6;--ink:#102e52;--muted:#526783;--line:rgba(16,46,82,.16);--glass:rgba(255,255,255,.68);--glass-bright:rgba(255,255,255,.76);color:var(--ink);color-scheme:light}
+body{background:#e4eaf0}
+.app-frame{border-color:rgba(16,46,82,.15);background:radial-gradient(circle at 10% 0%,rgba(211,225,239,.96),transparent 43%),radial-gradient(circle at 100% 40%,rgba(245,218,138,.18),transparent 40%),linear-gradient(155deg,#fbfaf7 0%,#f1f4f7 54%,#e6edf3 100%);box-shadow:0 28px 80px rgba(18,43,72,.18)}
+.app-frame::before{background:linear-gradient(135deg,transparent 30%,rgba(255,255,255,.72) 50%,transparent 65%)}
+.topbar{background:linear-gradient(180deg,rgba(251,250,247,.88),rgba(251,250,247,0))}
+.wordmark{color:var(--navy)}
+.avatar{border-color:rgba(16,46,82,.16);background:rgba(255,255,255,.66);color:var(--navy);box-shadow:0 5px 14px rgba(17,48,85,.08)}
+h1{color:var(--navy)}
+.micro{color:#5d7089}
+.pass-people{border-color:rgba(16,46,82,.14);background:rgba(255,255,255,.5)}
+.pass-person{color:#5c6d83}.pass-person.active{background:rgba(12,49,93,.1);color:var(--navy);box-shadow:inset 0 0 0 1px rgba(16,46,82,.1)}
+.pass-card{border-color:rgba(16,46,82,.2);background:linear-gradient(145deg,rgba(255,255,255,.88),rgba(233,240,247,.76));box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 18px 38px rgba(25,54,89,.12);color:var(--navy)}
+.pass-card::after{background:linear-gradient(120deg,rgba(255,255,255,.72),transparent 34%,transparent 70%,rgba(47,92,139,.05))}
+.match,.pass-card-bottom{color:var(--navy)}
+.pass-card-top,.game-meta .pass-card-top{color:#526783}
+.game-date{border-color:rgba(16,46,82,.18);background:rgba(255,255,255,.7);box-shadow:inset 0 1px 0 #fff,0 5px 10px rgba(17,48,85,.08);color:var(--navy)}
+.ticket-divider{border-color:rgba(16,46,82,.28)}
+.open-pass-button{background:rgba(255,203,5,.1);box-shadow:inset 0 1px 0 #fff;color:#8a6500}
+.action-row{border-color:rgba(16,46,82,.14);background:rgba(255,255,255,.64);box-shadow:inset 0 1px 0 #fff,0 8px 20px rgba(25,54,89,.06)}
+.action-icon,.action-icon.warm{background:rgba(18,65,112,.1);color:var(--navy)}
+.action-row strong,.warm-action strong{color:var(--navy)}.action-row small{color:#62748a}.arrow,.warm-action .arrow{color:var(--navy)}
+.nav{border-color:rgba(16,46,82,.18);background:rgba(255,255,255,.7);box-shadow:0 10px 30px rgba(27,53,84,.15),inset 0 1px 0 #fff}
+.nav-item{color:#64758a}.nav-item.active{background:rgba(12,49,93,.1);color:#8a6500}
+.map-wrap{background:#dce4ec}.map-wrap>img{opacity:.7;filter:saturate(.58) brightness(.92)}
+.locate{border-color:rgba(16,46,82,.16);background:rgba(255,255,255,.82);color:var(--navy);box-shadow:0 5px 16px rgba(17,48,85,.14)}
+.route-sheet{border-color:rgba(16,46,82,.16);background:rgba(250,251,252,.86);box-shadow:inset 0 1px 0 #fff,0 -12px 30px rgba(17,48,85,.1)}
+.sheet-line{background:rgba(16,46,82,.3)}.route-heading h2,.setting-group h2{color:var(--navy)}.route-heading p{color:#5c6f86}.route-heading>strong{color:#927000}.route-heading>strong span{color:#526783}
+.access-option,.setting{color:var(--navy)}.access-option i,.setting>i{background:rgba(16,46,82,.22)}
+.route-directions p,.route-directions strong{color:var(--navy)}.route-directions small{color:#5c6f86}.route-directions li>span{background:rgba(255,203,5,.2);color:#705500}
+.route-button{color:#183556;box-shadow:0 8px 18px rgba(174,132,0,.18)}
+.profile-content{color:var(--navy)}.setting,.quiet-row{border-color:rgba(16,46,82,.16)}.setting strong,.quiet-row{color:var(--navy)}.setting small{color:#5c6f86}.quiet-row svg{color:#526783}
+.profile-edit{background:rgba(255,203,5,.14);color:#7a5d00}
+.toast{border-color:rgba(16,46,82,.19);background:linear-gradient(135deg,rgba(255,255,255,.88),rgba(222,232,242,.82));color:var(--navy);box-shadow:0 16px 34px rgba(17,48,85,.18),inset 0 1px 0 #fff}
+.pass-drawer{background:#edf2f6}.pass-drawer-backdrop{background:linear-gradient(180deg,rgba(247,250,252,.74),rgba(237,243,248,.54) 42%,rgba(231,238,245,.86)),url("images/stadium-night-pass.png") center / cover no-repeat}.pass-drawer::after{background:radial-gradient(circle at 50% 44%,rgba(255,255,255,.32),transparent 42%),linear-gradient(130deg,rgba(238,244,249,.52),transparent 48%,rgba(255,203,5,.12))}
+.drawer-header{color:var(--navy)}.pass-drawer .modal-close{border-color:rgba(16,46,82,.16);background:rgba(255,255,255,.78);color:var(--navy)}
+.digital-ticket{border-color:rgba(16,46,82,.18);background:linear-gradient(150deg,rgba(255,255,255,.92),rgba(231,239,247,.9));color:var(--navy);box-shadow:0 24px 55px rgba(17,48,85,.2),inset 0 1px 0 #fff}
+.ticket-event{border-color:rgba(16,46,82,.14);background:linear-gradient(105deg,rgba(255,255,255,.72),rgba(222,233,244,.62));color:var(--navy)}.ticket-event p,.ticket-event p strong{color:var(--navy)}
+.ticket-stub{border-color:rgba(16,46,82,.2);background:rgba(255,255,255,.38)}.ticket-stub small{color:#5c6f86}.ticket-stub strong{color:var(--navy)}.drawer-instruction{border-color:rgba(16,46,82,.16);background:rgba(255,255,255,.7);color:var(--navy)}
+
+/* AA contrast pass: maize is reserved for navy surfaces and fills; readable text uses a dark-gold alternative. */
+:root{--maize:#ffcb05;--maize-text:#695100;--accessible-navy:#082d5a;--route-purple:#5b3f94}
+.match,.pass-card-bottom,.game-date,.open-pass-button,.route-button{color:var(--accessible-navy)}
+.match i,.game-date small,.pass-preferences,.profile-edit,.pass-person svg,.access-option svg,.setting svg,.pass-note{color:var(--maize-text)}
+.open-pass-button{border-color:var(--accessible-navy);background:var(--maize);box-shadow:0 8px 18px rgba(105,81,0,.16)}
+.open-pass-button:focus-visible,.route-button:focus-visible,.nav-item:focus-visible,.sheet-line:focus-visible{outline:3px solid var(--accessible-navy);outline-offset:3px}
+.route-button{background:var(--maize);border:1px solid var(--accessible-navy);box-shadow:0 8px 18px rgba(105,81,0,.16)}
+.nav-item.active{background:var(--accessible-navy);color:var(--maize);box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)}
+.route-heading h2{color:#123f78}.route-heading p{color:#385777}.route-heading>strong{color:var(--route-purple)}.route-heading>strong span{color:#385777}
+.route-directions li>span{background:#ede4ff;color:#493174}.route-directions p,.route-directions strong{color:var(--accessible-navy)}
+
+/* Premium greeting mascot */
+.greeting-lockup{display:flex;align-items:flex-end;justify-content:space-between;gap:10px}
+.greeting-lockup h1{position:relative;z-index:1;max-width:245px}
+.wolverine-mascot{width:76px;height:76px;object-fit:contain;object-position:center bottom;margin:0 2px -3px 0;filter:drop-shadow(0 9px 12px rgba(8,45,90,.18))}
+
+/* Seat-map depth: a tilted stadium bowl and an elevated route layer. */
+.map-wrap{isolation:isolate;perspective:950px;background:radial-gradient(ellipse at 50% 38%,#f8fbff 0%,#d8e2ec 56%,#c6d2df 100%)}
+.stadium-stage{position:absolute;z-index:0;inset:23% 4% 17%;border:1px solid rgba(8,45,90,.18);border-radius:46%;background:radial-gradient(ellipse at center,rgba(255,255,255,.88),rgba(180,199,216,.65) 58%,rgba(118,145,169,.55));box-shadow:0 26px 28px rgba(8,45,90,.2),inset 0 0 0 18px rgba(255,255,255,.24);transform:rotateX(56deg) rotateZ(-1deg);transform-origin:center}
+.map-wrap>.stadium-map,.map-wrap>.route-path{position:absolute;z-index:1;inset:2% -9% auto;width:118%;height:69%;object-fit:cover;border-radius:43% 43% 35% 35%;transform:rotateX(48deg) scale(1.08);transform-origin:50% 44%;filter:saturate(.72) contrast(1.04) brightness(1.02);box-shadow:0 25px 28px rgba(8,45,90,.18)}
+.map-wrap>.route-path{z-index:2;inset:2% -9% auto;width:118%;height:69%;color:var(--maize);filter:drop-shadow(0 5px 4px rgba(8,45,90,.4));box-shadow:none}
+.map-wrap>.route-path path{stroke:var(--maize);stroke-width:8;stroke-dasharray:1 12;stroke-linecap:round}
+.map-wrap>.route-path.accessible .accessible-route{stroke:var(--route-purple);stroke-width:8;stroke-dasharray:1 12;filter:drop-shadow(0 3px 3px rgba(8,45,90,.34))}
+.map-wrap>.route-path.accessible .route-start,.map-wrap>.route-path.accessible .accessible-destination{fill:var(--route-purple)}
+.locate{z-index:3}.route-sheet{z-index:4}
+
+/* Draggable route sheet, with a keyboard-accessible handle. */
+.route-sheet{height:342px;max-height:calc(100% - 16px);transition:height .24s ease,box-shadow .24s ease}
+.route-sheet.is-expanded{height:calc(100% - 16px)}
+.route-sheet.is-dragging{transition:none;user-select:none}
+.sheet-line{display:block;width:58px;height:24px;margin:-4px auto 10px;padding:0;border:0;border-radius:999px;background:transparent;cursor:ns-resize;touch-action:none}
+.sheet-line::after{content:"";display:block;width:34px;height:4px;margin:auto;border-radius:999px;background:rgba(8,45,90,.36)}
+@media(max-width:390px){.wolverine-mascot{width:62px;height:62px}.greeting-lockup h1{max-width:220px}}
+
+/* Flexible pass people, countdown, and subdued active navigation. */
+.field-countdown{display:flex;align-items:center;justify-content:center;gap:14px;margin:12px 4px 14px;padding:14px 16px;border:1px solid rgba(8,45,90,.15);border-radius:14px;background:rgba(255,255,255,.54);color:var(--accessible-navy);box-shadow:inset 0 1px 0 rgba(255,255,255,.92)}
+.field-countdown svg{width:24px;height:24px;color:var(--maize-text)}.field-countdown small,.field-countdown strong{display:block}.field-countdown small{font-size:11px;font-weight:800;letter-spacing:.12em}.field-countdown strong{margin-top:3px;font-variant-numeric:tabular-nums;font-size:29px;letter-spacing:.065em;line-height:1}
+.pass-people{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;border:0;background:transparent;backdrop-filter:none}
+.pass-person{flex:0 1 auto;min-height:44px;padding:0 15px;border:1px solid rgba(8,45,90,.18);border-radius:999px;background:rgba(255,255,255,.72);color:#385777;box-shadow:inset 0 1px 0 #fff}
+.pass-person.active{background:rgba(8,45,90,.1);color:var(--accessible-navy);box-shadow:inset 0 0 0 1px rgba(8,45,90,.13)}
+.pass-person:focus-visible{outline:3px solid var(--accessible-navy);outline-offset:2px}
+.actions{margin:17px 0 18px}.actions .micro{margin-left:4px}.nav-item.active{background:rgba(8,45,90,.08);color:var(--accessible-navy);box-shadow:inset 0 0 0 1px rgba(8,45,90,.14)}
+
+/* Direct manipulation 3D stadium model. */
+.stadium-orbit{--orbit-z:0deg;position:absolute;z-index:1;inset:0 0 27%;transform-style:preserve-3d;transform:rotateZ(var(--orbit-z));transform-origin:50% 50%;transition:transform .18s ease;cursor:grab;touch-action:pan-y;outline:none}
+.stadium-orbit.is-rotating{cursor:grabbing;transition:none}.stadium-orbit:focus-visible{outline:3px solid var(--accessible-navy);outline-offset:-5px}
+.stadium-orbit .stadium-stage{position:absolute;z-index:0;inset:23% 4% 17%;border:1px solid rgba(8,45,90,.18);border-radius:46%;background:radial-gradient(ellipse at center,rgba(255,255,255,.88),rgba(180,199,216,.65) 58%,rgba(118,145,169,.55));box-shadow:0 26px 28px rgba(8,45,90,.2),inset 0 0 0 18px rgba(255,255,255,.24);transform:rotateX(56deg) rotateZ(-1deg);transform-origin:center}
+.stadium-orbit .stadium-map,.stadium-orbit .route-path{position:absolute;z-index:1;inset:2% -9% auto;width:118%;height:86%;object-fit:cover;border-radius:43% 43% 35% 35%;transform:rotateX(48deg) scale(1.08);transform-origin:50% 44%;filter:saturate(.72) contrast(1.04) brightness(1.02);box-shadow:0 25px 28px rgba(8,45,90,.18)}
+.stadium-orbit .route-path{z-index:2;filter:drop-shadow(0 5px 4px rgba(8,45,90,.4));box-shadow:none}.map-orbit-hint{position:absolute;z-index:3;top:76px;left:50%;margin:0;padding:5px 9px;border-radius:999px;background:rgba(255,255,255,.78);color:#385777;font-size:10px;font-weight:750;letter-spacing:.06em;transform:translateX(-50%);box-shadow:0 4px 10px rgba(8,45,90,.12)}
+.stadium-orbit .route-path.accessible .accessible-route{stroke:var(--route-purple);stroke-width:8;stroke-dasharray:1 12;filter:drop-shadow(0 3px 3px rgba(8,45,90,.34))}
+.stadium-orbit .route-path.accessible .route-start,.stadium-orbit .route-path.accessible .accessible-destination{fill:var(--route-purple)}
+
+/* Keep the active route and its progress action visible without covering the stadium. */
+.route-sheet.directions-active{display:block;height:auto;max-height:calc(100% - 76px);overflow:auto}
+.route-sheet.directions-active .route-directions{display:grid;gap:13px;margin:3px 0 20px;overflow:visible;padding-right:0}.route-sheet.directions-active .route-button{display:flex;margin-top:0}
+.route-directions li>span{background:var(--maize);color:var(--accessible-navy)}
+.route-heading>strong{color:var(--accessible-navy)}
+
+/* 44px hit areas and keyboard focus for the remaining controls. */
+.access-option{min-height:44px;margin:16px 0}.access-option i{flex:0 0 auto}.access-option input:focus-visible+i{outline:3px solid var(--accessible-navy);outline-offset:3px}
+.avatar{width:44px;height:44px;border-color:rgba(8,45,90,.2);background:rgba(255,255,255,.68);color:var(--accessible-navy);box-shadow:0 4px 10px rgba(8,45,90,.08)}
+.avatar:focus-visible,.profile-edit:focus-visible{outline:3px solid var(--maize-text);outline-offset:3px}
+.profile-edit{min-height:44px;border-color:rgba(8,45,90,.2);background:transparent;color:var(--accessible-navy);box-shadow:none}
+
+/* Supplied Michigan brand marks. */
+.wordmark{display:inline-flex;align-items:center;gap:8px}.wordmark-logo{width:28px;height:28px;object-fit:contain;flex:0 0 auto}.wolverine-mascot{object-position:center;filter:drop-shadow(0 8px 10px rgba(8,45,90,.16))}
+
+/* Home rhythm refinements. */
+.field-countdown>span{width:100%;text-align:center}.field-countdown{gap:0}.pass-people{margin-bottom:22px}
+
+/* Rotatable aerial 3D stadium model. */
+.stadium-orbit .stadium-stage{display:none}.stadium-orbit .stadium-map{inset:0;width:100%;height:100%;object-fit:contain;transform:none;filter:none;box-shadow:none;border-radius:0}
+.stadium-orbit .route-path{inset:0;width:100%;height:100%;transform:none;filter:drop-shadow(0 3px 3px rgba(8,45,90,.3));border-radius:0}.map-orbit-hint{top:34px}
+
+/* Softer route sequence and explicit route actions. */
+.route-directions li>span{width:21px;height:21px;background:rgba(255,203,5,.26);color:var(--maize-text);font-size:11px;font-weight:750}
+.route-actions{display:flex;align-items:stretch;gap:9px}.route-actions .route-button{flex:1}.cancel-route{flex:0 0 48px;width:48px;min-height:48px;display:grid;place-items:center;border:1px solid rgba(8,45,90,.22);border-radius:16px;background:rgba(255,255,255,.78);color:var(--accessible-navy);box-shadow:0 8px 18px rgba(8,45,90,.1)}.cancel-route svg{width:19px;height:19px}.cancel-route:focus-visible{outline:3px solid var(--accessible-navy);outline-offset:3px}
+
+/* Calm pass drawer with reliable, shadow-safe horizontal swiping. */
+.pass-drawer{background:linear-gradient(160deg,#f7fafc,#e8eef5);overflow:hidden}.pass-drawer-backdrop{display:none}.pass-drawer::after{background:radial-gradient(circle at 50% 30%,rgba(255,255,255,.9),transparent 45%),linear-gradient(145deg,rgba(211,225,239,.42),transparent 60%)}
+.ticket-carousel{gap:14px;padding:32px 50px 42px;scroll-padding:50px;overflow-x:auto;overflow-y:hidden;touch-action:pan-y;cursor:grab}.ticket-carousel.is-dragging{cursor:grabbing;user-select:none}.digital-ticket{flex:0 0 calc(100% - 72px);min-height:442px;overflow:visible;border-color:rgba(16,46,82,.15);background:linear-gradient(150deg,#fff,#eef4f9);box-shadow:0 18px 34px rgba(17,48,85,.18),inset 0 1px 0 #fff;filter:none;opacity:var(--ticket-opacity,.58)}.digital-ticket.active{box-shadow:0 18px 34px rgba(17,48,85,.24),inset 0 1px 0 #fff}
+.ticket-event{display:block;padding:17px 20px 15px;border-bottom:1px solid rgba(16,46,82,.13);background:rgba(232,240,247,.68);color:var(--navy)}.ticket-event h2{margin:0 0 10px;color:var(--accessible-navy);font-size:23px;letter-spacing:-.035em;line-height:1}.ticket-event-details{display:grid;grid-template-columns:48px 1fr;gap:10px;align-items:center}.ticket-event> .ticket-event-details>span{width:48px;height:48px;border:1px solid rgba(8,45,90,.14);border-radius:13px;background:rgba(8,45,90,.06);color:var(--accessible-navy);font-size:10px}.ticket-event> .ticket-event-details>span strong{font-size:19px}.ticket-event p{color:#526783;font-size:11px;line-height:1.25}.ticket-event p strong{margin-top:2px;color:var(--accessible-navy);font-size:16px;line-height:1.08}
+.ticket-qr{display:block;width:142px;height:142px;object-fit:contain;margin:27px auto 22px;padding:8px;border:1px solid rgba(8,45,90,.12);border-radius:16px;background:#fff;box-shadow:0 10px 22px rgba(17,48,85,.14)}
+.ticket-stub{grid-template-columns:1.4fr .7fr .7fr;gap:12px;margin-top:auto;padding:16px 20px 20px;border-top:1px dashed rgba(16,46,82,.2);background:rgba(255,255,255,.38)}.ticket-stub small{font-size:10px;color:#62748a}.ticket-stub strong{color:var(--accessible-navy);font-size:12px}
+@media(max-height:730px){.digital-ticket{min-height:390px}.ticket-qr{width:112px;height:112px;margin:16px auto}.ticket-event{padding:14px 18px}.ticket-stub{padding:13px 18px 17px}}
+
+/* Final control and ticket refinements. */
+:root{--control-radius:14px}
+button:not(.wordmark),.pass-person,.action-row,.open-pass-button,.route-button,.cancel-route,.avatar,.locate,.nav-item,.profile-edit,.modal-close{border-radius:var(--control-radius)}
+.match-row .match{line-height:1.22}
+.setting svg{color:var(--accessible-navy)}
+.route-directions li>span{background:rgba(8,45,90,.12);color:var(--accessible-navy)}
+
+/* The map remains an overhead drone orbit: rotate only around the visual z-axis. */
+.stadium-orbit{transform:rotateZ(var(--orbit-z))}
+.stadium-orbit .stadium-map,.stadium-orbit .route-path{inset:-9% -10%;width:120%;height:120%;transform:none}
+
+/* Full-width pass cards with deliberate interaction settling after a swipe. */
+.ticket-carousel{gap:16px;padding:30px 32px 76px;scroll-padding:32px}
+.digital-ticket{flex-basis:calc(100% - 64px)}
+.ticket-event> .ticket-event-details>span{display:grid;place-items:center;text-align:center;line-height:1.05}
+.ticket-qr{width:192px;height:192px;margin:24px auto 20px}
+.ticket-stub{padding-bottom:24px}
+
+/* Drawer controls are deliberately centered and separated from the pass content. */
+.drawer-header{inset:22px 0 auto;justify-content:center;text-align:center}
+.pass-drawer .pass-drawer-close{position:absolute;z-index:3;bottom:20px;left:50%;width:44px;height:44px;transform:translateX(-50%);border-radius:var(--control-radius);background:rgba(255,255,255,.88);color:var(--accessible-navy);box-shadow:0 8px 18px rgba(17,48,85,.16)}
+@media(max-height:730px){.ticket-carousel{padding-top:26px;padding-bottom:68px}.ticket-qr{width:150px;height:150px;margin:16px auto}.pass-drawer .pass-drawer-close{bottom:14px}}
+
+/* Gentle pass browsing: resist quick movement, then glide to a card once the gesture ends. */
+.ticket-carousel{padding:30px 20px 76px;scroll-padding:20px;scroll-snap-type:x proximity;scroll-behavior:smooth}
+.digital-ticket{flex-basis:100%;transition:transform .58s cubic-bezier(.18,.76,.22,1),opacity .58s ease,filter .58s ease}
+.ticket-qr{box-shadow:none}
+.pass-drawer .pass-drawer-close{top:20px;right:20px;bottom:auto;left:auto;transform:none}
+
+/* Blue-outlined route dots, a true destination pin, and a directional current-location glow. */
+.route-path .route-outline{stroke:#0b5fab;stroke-width:14;stroke-dasharray:1 12;stroke-linecap:round;fill:none}
+.route-path .accessible-route,.route-path .accessible-route-outline,.route-path .accessible-destination{display:none}
+.route-path.accessible .standard-route,.route-path.accessible .standard-route-outline,.route-path.accessible .standard-destination{display:none}
+.route-path.accessible .accessible-route,.route-path.accessible .accessible-route-outline,.route-path.accessible .accessible-destination{display:block}
+.route-path .route-destination-pin{fill:#fff;stroke:#0b5fab;stroke-width:4;filter:drop-shadow(0 3px 4px rgba(8,45,90,.26))}
+.route-path .route-start .location-beam{fill:rgba(33,122,232,.24);stroke:none}
+.route-path .route-start .location-halo{fill:rgba(31,118,226,.2);stroke:#0b5fab;stroke-width:3;filter:drop-shadow(0 0 8px rgba(33,122,232,.5))}
+.route-path .route-start .location-dot{fill:#fff;stroke:#0b5fab;stroke-width:5}
+.game-date{border-radius:12px}
+@media(max-height:730px){.ticket-carousel{padding:26px 20px 68px}.ticket-qr{width:150px;height:150px}}
+
+/* Ticket identity is the focal point; game details stay clear but secondary. */
+.ticket-event{position:relative;min-height:116px;padding:18px 20px 17px}
+.ticket-event h2{margin:0 0 12px;text-align:center;font-size:28px;line-height:1.05}
+.ticket-event-details{display:block;padding:0 64px 0 0;text-align:center}
+.ticket-event> .ticket-event-details>span{position:absolute;top:50%;right:20px;transform:translateY(-50%)}
+.ticket-event p{margin:0;text-align:center}.ticket-event p strong{margin:0;font-size:17px;line-height:1.15}
+.ticket-stub strong{font-size:17px;line-height:1.1}
+
+/* Keep every route maize; blue is only the fine border around each route dot. */
+.route-path .route-outline{stroke-width:10}
+.route-path .standard-route,.route-path.accessible .accessible-route{stroke:var(--maize);stroke-width:8}
+.route-path .route-destination-pin{fill:var(--maize);stroke:#0b5fab;stroke-width:3;stroke-dasharray:none;stroke-linecap:round}
+.stadium-orbit .route-path.accessible .accessible-route{stroke:var(--maize);stroke-width:8;stroke-dasharray:1 12;filter:drop-shadow(0 3px 3px rgba(8,45,90,.3))}
+.stadium-orbit .route-path.accessible .route-destination-pin{fill:var(--maize);stroke:#0b5fab;stroke-width:3;stroke-dasharray:none}
+
+/* Final ticket alignment and consistently restrained route markers. */
+.ticket-event h2{font-size:31px}
+.ticket-event-details{padding-right:72px;text-align:left}
+.ticket-event p,.ticket-event p strong{text-align:left}
+.ticket-event p strong{font-size:19px;line-height:1.18}
+.ticket-event> .ticket-event-details>span{top:72px}
+.ticket-event.has-accessibility{min-height:142px}
+.ticket-accessibility{position:absolute;bottom:15px;left:20px;display:flex;align-items:center;gap:6px;color:var(--accessible-navy);font-size:12px;font-weight:800}.ticket-accessibility svg{width:16px;height:16px;color:var(--maize-text)}
+
+.route-path .route-outline{stroke:#1c2733;stroke-width:10}
+.route-path .route-destination-pin{stroke:#1c2733;stroke-width:3;stroke-dasharray:none}
+.stadium-orbit .route-path.accessible .route-destination-pin{stroke:#1c2733}
+.route-path .route-start .location-halo{display:none}
+.route-path .route-start .location-dot{stroke:#1c2733;stroke-width:4}
+
+/* Reserve a full gutter around each scrollable pass so its elevation is never clipped. */
+.ticket-carousel{padding:42px 38px 104px;scroll-padding:38px}
+.digital-ticket{overflow:hidden}
+.digital-ticket,.digital-ticket.active{box-shadow:0 12px 20px rgba(17,48,85,.18),inset 0 1px 0 #fff}
+@media(max-height:730px){.ticket-carousel{padding:34px 34px 82px;scroll-padding:34px}}
+
+/* A black wash keeps the stadium image visible while setting off the pass cards. */
+.pass-drawer{background:linear-gradient(180deg,rgba(0,0,0,.58),rgba(0,0,0,.7)),url("images/stadium_BG.jpg") center / cover no-repeat}
+.pass-drawer::after{display:none}
+
+/* The game and date share one deliberate baseline; the passholder remains unchanged. */
+.ticket-event-details{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:14px;padding:0}
+.ticket-event> .ticket-event-details>span{position:static;grid-column:2;grid-row:1;transform:none}
+.ticket-event p,.ticket-event p strong{text-align:left}
+.ticket-event p strong{font-size:21px}
+
+/* Let the supplied QR fill the credential with a consistent 20px inset. */
+.ticket-qr{width:calc(100% - 40px);height:auto;aspect-ratio:1;margin:20px auto;object-fit:contain}
+
+/* An app-wide reading-size preference preserves hierarchy while enlarging all key copy. */
+html.large-text h1{font-size:42px}html.large-text .micro{font-size:12px}html.large-text .intro{font-size:17px}html.large-text .field-countdown small{font-size:12px}html.large-text .field-countdown strong{font-size:34px}html.large-text .action-row strong{font-size:17px}html.large-text .action-row small{font-size:14px}html.large-text .pass-person{font-size:13px}html.large-text .match{font-size:28px}html.large-text .pass-card-top,html.large-text .pass-card-bottom,html.large-text .pass-preferences{font-size:13px}html.large-text .route-heading h2{font-size:22px}html.large-text .route-heading p,html.large-text .access-option{font-size:14px}html.large-text .route-directions p{font-size:15px}html.large-text .route-button,html.large-text .open-pass-button{font-size:15px}html.large-text .ticket-event h2{font-size:35px}html.large-text .ticket-event p strong{font-size:23px}html.large-text .ticket-stub small{font-size:11px}html.large-text .ticket-stub strong{font-size:19px}html.large-text .setting strong,html.large-text .quiet-row{font-size:15px}html.large-text .setting small{font-size:13px}html.large-text .nav-item{font-size:12px}
+
+/* The accessibility status is a quiet, centered chip beneath the eligible passholder. */
+.digital-ticket[data-ticket="alex"] .ticket-stub{padding-bottom:20px}
+.digital-ticket[data-ticket="alex"] .ticket-event .ticket-accessibility{position:static;display:flex;align-items:center;justify-content:center;gap:6px;width:max-content;height:auto;min-height:0;box-sizing:border-box;margin:-3px auto 10px;padding:5px 11px;border:1px solid rgba(105,81,0,.25);border-radius:999px;background:rgba(255,203,5,.2);color:var(--maize-text);font-size:11px;font-weight:800;line-height:1;white-space:nowrap}.digital-ticket[data-ticket="alex"] .ticket-event .ticket-accessibility svg{width:14px;height:14px;color:var(--maize-text)}
+
+/* The launch blue lingers briefly, then dissolves directly into the ready app. */
+.app-launch-overlay{position:absolute;z-index:9999;inset:0;display:none;background:#00274c;opacity:0;pointer-events:none}
+html.is-app-launching .app-launch-overlay{display:block;opacity:1;transition:opacity .9s ease}
+html.is-app-launching.is-app-revealing .app-launch-overlay{opacity:0}
+
+/* Keep the device silhouette and surrounding canvas stable in every app state. */
+.app-frame{overflow:hidden!important}
+html,body,.app-shell{background:#000!important}
+
+/* Align Alex's accessibility mark 2px closer to the tab's right edge. */
+.pass-person[data-pass="alex"] svg{transform:translateX(2px);color:var(--accessible-navy)}
+
+/* The full-screen pass drawer arrives with a measured, continuous reveal. */
+.pass-drawer{animation:pass-drawer-in .5s cubic-bezier(.16,.9,.28,1) both;transform-origin:50% 58%}
+.scrim{animation:drawer-scrim-in .42s ease-out both}
+@keyframes pass-drawer-in{from{opacity:0;transform:translateY(28px) scale(.975);filter:blur(4px)}to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}
+@keyframes drawer-scrim-in{from{opacity:0}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){.pass-drawer,.scrim{animation:none}}
+
+/* A one-time field-access prompt follows the first pass-drawer dismissal. */
+.warmups-modal{inset:50% 17px auto;transform:translateY(-50%);border-color:rgba(16,46,82,.16);background:#edf1f6;color:var(--accessible-navy);box-shadow:0 18px 45px rgba(17,48,85,.18),inset 0 1px 0 #fff;animation:warmups-in .28s ease-out}
+.warmups-modal h2{color:var(--accessible-navy);font-weight:600;text-align:center}
+.warmups-modal.modal-small p{color:#243f61;text-align:center}
+.warmup-actions{display:grid;gap:10px;margin-top:16px}
+.warmup-actions .route-button{margin-top:0}
+.warmups-not-now{min-height:46px;border:1px solid rgba(8,45,90,.2);background:rgba(255,255,255,.72);color:var(--accessible-navy);font-size:13px;font-weight:800}
+@keyframes warmups-in{from{opacity:0;transform:translateY(calc(-50% + 12px))}to{opacity:1;transform:translateY(-50%)}}
+
+/* Align the global header with the app content and keep route symbols in brand blue. */
+.topbar{padding-left:21px;padding-right:21px}
+.access-option svg{color:var(--accessible-navy)}
+
+/* Keep every desktop preview on the iPhone 15 Pro's 393 × 852 canvas. */
+.app-shell{min-height:100svh}
+.app-frame{width:min(393px,calc((100svh - 40px) * .4612676),calc(100vw - 40px));height:auto;min-height:0;max-height:852px;aspect-ratio:393 / 852}
+@media(max-width:500px){.app-shell{padding:0}.app-frame{width:100vw;height:100svh;min-height:0;max-height:none;aspect-ratio:393 / 852;border-radius:0}}
+
+/* One device silhouette for the app, its launch state, and the launcher. */
+.app-frame{border-radius:24px}
+@media(max-width:500px){.app-frame{border-radius:24px}}
+
+/* The iPhone status area is part of the device canvas in every app state. */
+.device-status{position:absolute;z-index:10001;inset:0 0 auto;height:54px;display:grid;grid-template-columns:1fr 112px 1fr;align-items:center;padding:5px 20px 0;background:transparent;color:#102e52;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",sans-serif;font-size:12px;font-weight:700;letter-spacing:-.02em;pointer-events:none}
+.device-status-time{justify-self:start}.dynamic-island{justify-self:center;width:104px;height:23px;border-radius:999px;background:#000}.device-status-icons{justify-self:end;display:flex;align-items:center;gap:5px}.device-status-icons svg{width:16px;height:12px}.device-status-icons .status-cellular{fill:currentColor;stroke:none}.device-status-icons .status-wifi{fill:none;stroke:currentColor;stroke-width:1.8}.status-battery{position:relative;width:22px;height:11px;border:1.5px solid currentColor;border-radius:3px}.status-battery::after{content:"";position:absolute;top:2px;right:-3px;width:2px;height:5px;border-radius:0 2px 2px 0;background:currentColor}.status-battery i{display:block;width:14px;height:7px;margin:1px;background:currentColor;border-radius:1px}
+.topbar{inset:54px 0 auto;height:78px;padding-top:17px;padding-bottom:14px}.views{inset:132px 0 0}.pass-drawer .pass-drawer-close{top:74px}
+.topbar{background:transparent}
+
+/* Keep the app-frame highlight level with the device, without a diagonal tilt. */
+.app-frame::before{transform:none}
+
+/* Tighten the app header and keep the pass-dismissal control below the carousel. */
+.topbar{padding-top:8px}
+.pass-drawer .pass-drawer-close{position:absolute;top:auto;right:auto;bottom:20px;left:50%;transform:translateX(-50%)}
+@media(max-height:730px){.pass-drawer .pass-drawer-close{bottom:14px}}
+
+/* The supplied launcher image is cropped horizontally so it fills the device outline. */
+.ticket-carousel{padding:42px 20px 104px;scroll-padding:20px}
+@media(max-height:730px){.ticket-carousel{padding:34px 20px 82px;scroll-padding:20px}}
+
+/* Keep the close control exactly 20px after the carousel, not viewport-anchored. */
+.ticket-carousel{padding:42px 20px 0}
+.pass-drawer .pass-drawer-close{position:static;flex:0 0 44px;align-self:center;margin-top:20px;transform:none}
+@media(max-height:730px){.ticket-carousel{padding:34px 20px 0}.pass-drawer .pass-drawer-close{margin-top:20px}}
+
